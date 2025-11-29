@@ -1,0 +1,72 @@
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@company.com",
+    "password": "secret246",
+    "role": "manager",
+    "department": "Legal"
+}
+
+###
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Sipho Mciwa",
+    "email": "siphomciwa@gmail.com",
+    "password": "secret123",
+    "role": "employee",
+    "department": "IT"
+}
+
+
+###
+GET http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "siphomciwa@gmail.com",
+    "password": "secret123"
+}
+
+
+###
+GET http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "john@company.com",
+    "password": "secret246"
+}
+
+###
+GET http://localhost:3000/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ0MTU5MDgsImV4cCI6MTc2NDQxNjgwOH0.lMnm1rWyD6yE_Bw6upNUiRjt3BLPUgyHQebJdTlt1oI
+Content-Type: application/json
+
+
+###
+GET http://localhost:3000/user-management/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
+
+###
+GET http://localhost:3000/user-management/users/692ae4d43bc4cf3a94d0c6f0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
+
+
+###
+PUT http://localhost:3000/user-management/users/692ae4d43bc4cf3a94d0c6f0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
+Content-Type: application/json
+
+{
+    "role": "employee"
+}
+
+
+###
+DELETE  http://localhost:3000/user-management/users/692afb5d2881fc65896c6c29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
