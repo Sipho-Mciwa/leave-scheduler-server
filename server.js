@@ -1,6 +1,7 @@
 const express = require("express");
 const authRouter = require('./routes/Authentication/auth');
 const userManagementRouter = require('./routes/User_Management/userManagement');
+const leaveRequestRouter = require('./routes/Leave_Requests/leaveRequests');
 const { default: mongoose } = require("mongoose");
 
 const server = express();
@@ -32,6 +33,9 @@ server.use('/auth', authRouter);
 
 //User Management Routes
 server.use('/user-management', userManagementRouter);
+
+//Leave Requests Routes
+server.use('/leave-request', leaveRequestRouter);
 
 
 

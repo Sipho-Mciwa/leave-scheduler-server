@@ -61,7 +61,7 @@ router.delete('/users/:id', authenticateToken(allowedRoles), async (req, res) =>
         const user = await User.findById(req.params.id);
         if (!user) return res.status(401).json({ message: "Cannot find user" });
         
-        const removeUser = await User.findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id);
         res.send({message: 'User has been removed'});
     } catch (error) {
         res.status(500).send({message: error.message});

@@ -16,15 +16,15 @@ router.post('/register', async (req, res) => {
         user.password = hashedPwd;
 
         const saved = await user.save();
-        res.status(201).json(user).send('Account created successfully');
+        res.status(201).send({message: 'Account created successfully'});
 
     } catch (error) {
         //Duplicate Key error code
         if (error.code === 11000) {
             return (res.status(400).send('Email already exists'));
+        } else {
+            return (res.status(500).send('Internal server error'));
         }
-
-        res.status(500).send('Internal server error');
     }
 });
 
@@ -37,7 +37,7 @@ router.get('/login', async (req, res) => {
         if (user.length === 0) return res.status(400).json({ message:'Cannot find user'});
         
         try {
-            const currentUser = {name: user[0].name, email: user[0].email, role: user[0].role};
+            const currentUser = {name: user[0].name, email: user[0].email, role: user[0].role, id: user[0]._id};
             if (await bcrypt.compare(req.body.password, user[0].password)) {
                 const accessToken = generateAccessToken(currentUser);
                 res.json({token: accessToken, user: currentUser});
