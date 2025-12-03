@@ -2,6 +2,8 @@ const express = require("express");
 const authRouter = require('./routes/Authentication/auth');
 const userManagementRouter = require('./routes/User_Management/userManagement');
 const leaveRequestRouter = require('./routes/Leave_Requests/leaveRequests');
+const leaveApprovalRouter = require('./routes/Leave_Approval/leaveApproval');
+const leaveBalanceRouter = require('./routes/Leave_Balances/leaveBalances');
 const { default: mongoose } = require("mongoose");
 
 const server = express();
@@ -36,6 +38,12 @@ server.use('/user-management', userManagementRouter);
 
 //Leave Requests Routes
 server.use('/leave-request', leaveRequestRouter);
+
+//Leave Approval Routes
+server.use('/leave-approval', leaveApprovalRouter);
+
+//Leave Balance Routes
+server.use('/leave-balances', leaveBalanceRouter);
 
 
 

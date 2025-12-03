@@ -4,6 +4,27 @@ const Leave = require('../../models/LeaveRequests');
 const { authenticateToken } = require('../../middleware/authMiddleware');
 const moment = require('moment'); 
 
+function getLeaveDays(startDateStr, endDateStr) {
+    const startDate = moment(startDateStr);
+    const endDate = moment(endDateStr);
+
+    if (!startDate.isValid() || !endDate.isValid()) {
+        return
+    }
+
+    return ({days: endDate.diff(startDate, 'days'), startDate: startDate, endDate: endDate});
+}
+
+function filterForEmployee(leaveRequests, userId) {
+    const employeeLeaves = []
+    leaveRequests.forEach((leave) => {
+        if (leave.employeeID.toString() === userId) {
+            employeeLeaves.push(leave);
+        }
+    });
+    return (employeeLeaves);
+}
+
 const allowedRoles = ['admin', 'manager', 'employee'];
 
 //Submit a leave request
@@ -22,7 +43,8 @@ router.post('/leave', authenticateToken(allowedRoles), async (req, res) => {
             endDate: endDateObj,
             days: date.days,
             reason: req.body.reason,
-            employeeID: req.user.id
+            employeeID: req.user.id,
+            
         });
     
         await leaveRequest.save();
@@ -95,25 +117,5 @@ router.delete('/leave/:id', authenticateToken(allowedRoles), async (req, res) =>
     }
 });
 
-function getLeaveDays(startDateStr, endDateStr) {
-    const startDate = moment(startDateStr);
-    const endDate = moment(endDateStr);
-
-    if (!startDate.isValid() || !endDate.isValid()) {
-        return
-    }
-
-    return ({days: endDate.diff(startDate, 'days'), startDate: startDate, endDate: endDate});
-}
-
-function filterForEmployee(leaveRequests, userId) {
-    const employeeLeaves = []
-    leaveRequests.forEach((leave) => {
-        if (leave.employeeID.toString() === userId) {
-            employeeLeaves.push(leave);
-        }
-    });
-    return (employeeLeaves);
-}
 
 module.exports = router

@@ -13,7 +13,8 @@ const leaveSchema = new mongoose.Schema({
     reason: {type: String, maxLength: 500},
     approverId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: null
     }
 }, {timestamps: true});
 
