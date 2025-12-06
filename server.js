@@ -7,7 +7,7 @@ const leaveBalanceRouter = require('./routes/Leave_Balances/leaveBalances');
 const { default: mongoose } = require("mongoose");
 
 const server = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const MONGO_URL = process.env.MONGO_URI || 'mongodb://localhost:27017/leave-scheduler-server'
 
@@ -20,6 +20,13 @@ mongoose.connect(MONGO_URL)
 .catch((error) => {
     console.log('MongoDB connection error:', error);
     process.exit(1);
+});
+
+server.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Replace with your client's origin
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
 });
 
 

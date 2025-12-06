@@ -1,9 +1,9 @@
-POST http://localhost:3000/auth/register
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
     "name": "John Doe",
-    "email": "john@company.com",
+    "email": "manager.john@futurefocus.com",
     "password": "secret246",
     "role": "manager",
     "department": "Legal"
@@ -11,12 +11,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/auth/register
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
     "name": "David Brown",
-    "email": "david_brown@example.com",
+    "email": "admin.david@futurefocus.com",
     "password": "dbrown456",
     "role": "admin",
     "department": "IT"
@@ -24,20 +24,19 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/auth/register
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "name": "Sipho Mciwa",
-    "email": "siphomciwa@gmail.com",
-    "password": "test369",
-    "role": "employee",
-    "department": "IT"
+  "name": "Sipho Mciwa",
+  "email": "sipho@futurefocus.com",
+  "password": "test-pass321",
+  "role": "employee",
+  "department": "IT"
 }
 
-
 ###
-GET http://localhost:3000/auth/login
+POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
@@ -46,116 +45,21 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/auth/login
+POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "email": "siphomciwa@gmail.com",
-    "password": "test369"
+    "email": "sipho@futurefocus.com",
+    "password": "test-pass321"
 }
 
 
 ###
-GET http://localhost:3000/auth/login
+POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
     "email": "john@company.com",
     "password": "secret246"
-}
-
-###
-GET http://localhost:3000/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ0MTU5MDgsImV4cCI6MTc2NDQxNjgwOH0.lMnm1rWyD6yE_Bw6upNUiRjt3BLPUgyHQebJdTlt1oI
-Content-Type: application/json
-
-
-###
-GET http://localhost:3000/user-management/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
-
-###
-GET http://localhost:3000/user-management/users/692ae4d43bc4cf3a94d0c6f0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
-
-
-###
-PUT http://localhost:3000/user-management/users/692ae4d43bc4cf3a94d0c6f0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
-Content-Type: application/json
-
-{
-    "role": "employee"
-}
-
-
-###
-DELETE  http://localhost:3000/user-management/users/692afb5d2881fc65896c6c29
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDQyMDQxOH0.rATu-tp88B-gaV2ePMUAVNM4JSYl-vElJ3YerhRHSow
-
-
-###
-POST http://localhost:3000/leave-request/leave
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImRhdmlkX2Jyb3duQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWQiOiI2OTJmZjJhZWJkYzNjZmE0NWY2ZTE3NTciLCJpYXQiOjE3NjQ3NTAwMDZ9.bO-enFiDOmqW1CpDo2qTjAQM58img_mRFASY0aVbyW4
-Content-Type: application/json
-
-{
-  "leaveType": "vacation",
-  "startDate": "2025-03-05",
-  "endDate": "2025-03-07",
-  "reason": "Family trip"
-}
-
-
-###
-GET http://localhost:3000/leave-request/leave
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2lwaG8gTWNpd2EiLCJlbWFpbCI6InNpcGhvbWNpd2FAZ21haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaWQiOiI2OTJmMDUwNDgzYmI4OGVjN2FhZjhkOTIiLCJpYXQiOjE3NjQ2ODkxNjR9.FkMVkddaj_EAOgqErzhy9fQIrcT7UzMmo7w0_tZrYs4
-
-
-###
-POST http://localhost:3000/leave-request/leave
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImRhdmlkX2Jyb3duQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWQiOiI2OTJmMjMwMjc5NTg5OTMwODUxMzQ1YTciLCJpYXQiOjE3NjQ2OTY4ODF9.hTgp81yOilkzF_r-dN2CfAXvLGOg5NMtw-ORE7Kq6O8
-Content-Type: application/json
-
-{
-  "leaveType": "personal",
-  "startDate": "2025-03-15",
-  "endDate": "2025-03-27",
-  "reason": "I need a break"
-}
-
-###
-GET http://localhost:3000/leave-balances/balance/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImRhdmlkX2Jyb3duQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWQiOiI2OTJmMjMwMjc5NTg5OTMwODUxMzQ1YTciLCJpYXQiOjE3NjQ2OTY4ODF9.hTgp81yOilkzF_r-dN2CfAXvLGOg5NMtw-ORE7Kq6O8
-
-
-###
-PUT http://localhost:3000/leave-balances/balance/692ff2aebdc3cfa45f6e1757
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlkIjoiNjkyZmYzMWNiZGMzY2ZhNDVmNmUxNzVjIiwiaWF0IjoxNzY0NzUwMTE3fQ.HEEvU9XdN5tMgz2LnJPaVUxKBrFILKGaJY0To20qVto
-
-{
-    "leaveStatus": "pending"
-}
-###
-PUT http://localhost:3000/leave-request/leave/692f194e30e67796b78fd93c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImRhdmlkX2Jyb3duQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWQiOiI2OTJmMjMwMjc5NTg5OTMwODUxMzQ1YTciLCJpYXQiOjE3NjQ2OTY4ODF9.hTgp81yOilkzF_r-dN2CfAXvLGOg5NMtw-ORE7Kq6O8
-Content-Type: application/json
-
-{
-    "leaveType": "sick",
-    "reason": "Im dying here"
-}
-
-###
-DELETE  http://localhost:3000/leave-request/leave/692f19bd9a75933d0f5da4c0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImRhdmlkX2Jyb3duQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWQiOiI2OTJmMjMwMjc5NTg5OTMwODUxMzQ1YTciLCJpYXQiOjE3NjQ2OTY4ODF9.hTgp81yOilkzF_r-dN2CfAXvLGOg5NMtw-ORE7Kq6O8
-
-###
-POST http://localhost:3000/leave-approval/leave/692ff2dabdc3cfa45f6e175a/approve
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AY29tcGFueS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlkIjoiNjkyZmYzMWNiZGMzY2ZhNDVmNmUxNzVjIiwiaWF0IjoxNzY0NzUwMTE3fQ.HEEvU9XdN5tMgz2LnJPaVUxKBrFILKGaJY0To20qVto
-Content-Type: application/json
-
-{
-    "comment": "You can go."
 }
 

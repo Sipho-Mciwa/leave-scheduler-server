@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
         const hashedPwd = await bcrypt.hash(req.body.password, 10);
         user.password = hashedPwd;
 
-        const saved = await user.save();
+        await user.save();
         res.status(201).send({message: 'Account created successfully'});
 
     } catch (error) {
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
 });
 
 //Logs in a user Request Body
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
 
         //User using their email since it's unique for each user
