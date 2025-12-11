@@ -40,7 +40,7 @@ POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "email": "david_brown@example.com",
+    "email": "admin.david@futurefocus.com",
     "password": "dbrown456"
 }
 
@@ -63,3 +63,11 @@ Content-Type: application/json
     "password": "secret246"
 }
 
+###
+POST http://localhost:3001/leave-approval/leave/69399485589d701dd6a6a279/approve
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImFkbWluLmRhdmlkQGZ1dHVyZWZvY3VzLmNvbSIsInJvbGUiOiJhZG1pbiIsImlkIjoiNjkzOTVhZTcwMDA4OGYxNGE5YzM4OTE1IiwiaWF0IjoxNzY1Mzg4NjQ2fQ.jVBEuX0-CyurOzWS7ADprvghCt3iFy95zGgsuiWegAs
+
+
+###
+POST http://localhost:3001/leave-approval/leave/6939967a1fd5ecd9c4512320/reject
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aWQgQnJvd24iLCJlbWFpbCI6ImFkbWluLmRhdmlkQGZ1dHVyZWZvY3VzLmNvbSIsInJvbGUiOiJhZG1pbiIsImlkIjoiNjkzNDUzZTZjZTc3MDcwODk5NmJjYWM4IiwiaWF0IjoxNzY1MTIxNTUzfQ.tVZSK6YTWXQpiITZ7c686NCGj9T1pzPZV4WolET-K60

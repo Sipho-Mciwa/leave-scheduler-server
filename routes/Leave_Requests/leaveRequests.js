@@ -18,7 +18,7 @@ function getLeaveDays(startDateStr, endDateStr) {
 function filterForEmployee(leaveRequests, userId) {
     const employeeLeaves = []
     leaveRequests.forEach((leave) => {
-        if (leave.employeeID.toString() === userId) {
+        if (leave.employeeId._id.toString() === userId) {
             employeeLeaves.push(leave);
         }
     });
@@ -43,11 +43,13 @@ router.post('/leave', authenticateToken(allowedRoles), async (req, res) => {
             endDate: endDateObj,
             days: date.days,
             reason: req.body.reason,
-            employeeID: req.user.id,
-            
+            employeeId: req.user.id,
         });
-    
+
+      
         await leaveRequest.save();
+        console.log('User saved successfully:', leaveRequest);
+
         res.status(201).send({message: 'Leave request submitted'});
 
     } catch (error) {
@@ -56,14 +58,26 @@ router.post('/leave', authenticateToken(allowedRoles), async (req, res) => {
     
 });
 
+//http://localhost:3001/leave-request/leave
+
 //Returns leave requests
 router.get('/leave', authenticateToken(allowedRoles), async (req, res) => {
     try {
-        const leaveRequests = await Leave.find();
-        if (leaveRequests.length === 0) return res.status(401).json({ message:'Cannot find leave Requests'});
-        
-        if (req.user.role === 'employee') return (res.json(filterForEmployee(leaveRequests, req.user.id.toString())));
-        
+        const leaveRequests = await Leave.find().populate('employeeId').populate('approverId');
+
+        if (leaveRequests.length === 0) return res.status(200).json({ message:'Cannot find leave Requests'});
+        res.json(filterForEmployee(leaveRequests, req.user.id.toString()));
+    } catch (error) {
+        return res.status(400).send({message: error.message});
+    }
+});
+
+//Returns all pending leave requests
+router.get('/pending-leaves', authenticateToken(['admin', 'manager',]), async (req, res) => {
+    try {
+        const leaveRequests = await Leave.find().populate('employeeId').populate('approverId');
+
+        if (leaveRequests.length === 0) return res.status(200).json({ message:'Cannot find leave Requests'});
         res.json(leaveRequests);
     } catch (error) {
         return res.status(400).send({message: error.message});
@@ -73,7 +87,7 @@ router.get('/leave', authenticateToken(allowedRoles), async (req, res) => {
 //Return a single leave request
 router.get('/leave/:id', authenticateToken(allowedRoles), async (req, res) => {
     try{
-        const leaveRequest = await Leave.findById(req.params.id);
+        const leaveRequest = await Leave.findById(req.params.id).populate("employeeId").populate('approverId');
         if (!leaveRequest) return (res.send({message: 'Cannot find Leave Request'}));
 
         res.json(leaveRequest);
@@ -84,7 +98,7 @@ router.get('/leave/:id', authenticateToken(allowedRoles), async (req, res) => {
 
 //Update a leave request (Allowed before approval)
 router.put('/leave/:id', authenticateToken(allowedRoles), async (req, res) => {
-     const restricted = ['_id', 'leaveStatus', 'hiredate', 'createdAt', 'employeeID', 'days', 'updatedAt'];
+     const restricted = ['_id', 'leaveStatus', 'hiredate', 'createdAt', 'employeeId', 'days', 'updatedAt'];
     for (field of restricted) {
         if (req.body[field]) return res.status(400).json({ message: "Not allowed to modify " + field });
     }
@@ -108,10 +122,12 @@ router.put('/leave/:id', authenticateToken(allowedRoles), async (req, res) => {
 router.delete('/leave/:id', authenticateToken(allowedRoles), async (req, res) => {
     try {
         const leaveRequest = await Leave.findById(req.params.id);
-        if (!leaveRequest) return res.status(401).json({ message: "Cannot find user" });
-        
-        await Leave.findByIdAndDelete(req.params.id);
-        res.send({message: 'User has been removed'});
+        if (!leaveRequest) return res.status(401).json({ message: "Cannot find request" });
+
+        if (leaveRequest.leaveStatus === 'pending') {
+            await Leave.findByIdAndDelete(req.params.id);
+            res.send({message: 'Leave request has been removed'});
+        }
     } catch (error) {
         res.status(500).send({message: error.message});
     }

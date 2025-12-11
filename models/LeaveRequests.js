@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const leaveSchema = new mongoose.Schema({
-    employeeID: {
+    employeeId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: null
     },
     startDate: {type: Date, default: Date.now()},
     endDate: {type: Date},
@@ -15,7 +16,8 @@ const leaveSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         default: null
-    }
+    },
+    comment: { type: String, default: ''}
 }, {timestamps: true});
 
 module.exports = mongoose.model('Leave', leaveSchema);
