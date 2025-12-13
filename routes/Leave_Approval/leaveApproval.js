@@ -10,8 +10,6 @@ const allowedRoles = ['manager', 'admin'];
 //
 router.post('/leave/:id/approve', authenticateToken(allowedRoles), async (req, res) => {
     try {
-
-        console.log();
         const leaveRequest = await Leave.findById(req.params.id)
         if (!leaveRequest) return (res.send({message: 'Cannot find Leave Request'}));
        
@@ -36,13 +34,10 @@ router.post('/leave/:id/approve', authenticateToken(allowedRoles), async (req, r
                 'approverId': req.user.id,
                 'comment': req.body.comment
             }, {new: true});
-
-        
             res.send({message: "Leave approved"});
         } else {
             res.send({message: "Leave already approved"});   
         }
-        
     } catch (error) {
         return (res.send({message: error.message}));
     }

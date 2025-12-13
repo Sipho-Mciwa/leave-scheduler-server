@@ -45,11 +45,7 @@ router.post('/leave', authenticateToken(allowedRoles), async (req, res) => {
             reason: req.body.reason,
             employeeId: req.user.id,
         });
-
-      
         await leaveRequest.save();
-        console.log('User saved successfully:', leaveRequest);
-
         res.status(201).send({message: 'Leave request submitted'});
 
     } catch (error) {
@@ -73,7 +69,7 @@ router.get('/leave', authenticateToken(allowedRoles), async (req, res) => {
 });
 
 //Returns all pending leave requests
-router.get('/pending-leaves', authenticateToken(['admin', 'manager',]), async (req, res) => {
+router.get('/pending-leaves', authenticateToken(['admin', 'manager', 'employee']), async (req, res) => {
     try {
         const leaveRequests = await Leave.find().populate('employeeId').populate('approverId');
 
